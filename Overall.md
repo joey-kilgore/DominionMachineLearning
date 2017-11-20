@@ -47,12 +47,14 @@ Each network has 3 layers and a final comparison layer
     bonus cards
     bonus buys
     bonus treasure
+    victory points (buy phase only)
     card specific attributes (ex. cellar)
   3: card layer, which determines values for all possible cards. these cards include:
     in action phase:
       each action in the player hand
     in buy phase:
       each combination of cards that the plyaer has the buys and treasure for
+    nothing buy/action which is used for when the best option is to do nothing
   Comparison layer, which compares the values determined in the card layer.
     
 How the layers interact:

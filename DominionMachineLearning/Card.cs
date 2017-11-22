@@ -20,6 +20,24 @@ namespace DominionMachineLearning
             set;
         }
 
+        bool isAction   //true if the card is an action card
+        {
+            get;
+            set;
+        }
+
+        bool isVictory  //true if the card is a victory card
+        {
+            get;
+            set;
+        }
+
+        bool isTreasure //true if the card is a treasure card
+        {
+            get;
+            set;
+        }
+
         int bonusAction     //number of bonus actions the card gives when played
         {
             get;

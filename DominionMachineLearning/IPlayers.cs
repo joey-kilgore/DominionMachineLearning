@@ -52,6 +52,36 @@ namespace DominionMachineLearning
             set;
         }
 
+        /// <summary>
+        /// keeps track of the treasure the player has in play
+        /// </summary>
+        int currentTreasure
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// keeps track of the number of actions the player has left
+        /// </summary>
+        int currentAction
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// keeps track of the number of buys the player has
+        /// </summary>
+        int currentBuy
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// called when the player must take their turn
+        /// </summary>
         void playTurn();
     }
 }

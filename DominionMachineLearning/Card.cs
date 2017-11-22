@@ -74,5 +74,7 @@ namespace DominionMachineLearning
             set;
         }
 
+
+        void playCard(IPlayers player);    //method called when the card is played
     }
 }

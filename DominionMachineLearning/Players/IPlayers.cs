@@ -83,5 +83,12 @@ namespace DominionMachineLearning
         /// called when the player must take their turn
         /// </summary>
         void playTurn();
+
+        /// <summary>
+        /// called when a specific card action needs to be resolved
+        /// the name of the card tells what to do
+        /// </summary>
+        /// <param name="nameOfCard"></param>
+        void playSpecificAction(string nameOfCard);
     }
 }

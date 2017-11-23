@@ -6,30 +6,29 @@ using System.Threading.Tasks;
 
 namespace DominionMachineLearning.CardClassFiles
 {
-    class Village
+    class Silver : Card
     {
-        //All variables are set to the according values for the Village card
-        //notable variable of the copper card:
+        //All variables are set to the according values for the Silver card
+        //notable variable of the silver card:
         //  cost = 3
-        //  name = "VILLAGE"
-        //  isAction = true
-        //  bonusDraw = 1
-        //  bonusAction = 2
+        //  name = "SILVER"
+        //  isTreasure = true
+        //  bonusTreasure = 2
 
 
-        public Village()
+        public Silver()
         {
             cost = 3;
 
-            name = "VILLAGE";
+            name = "SILVER";
 
-            isAction = true;
+            isAction = false;
             isVictory = false;
-            isTreasure = false;
+            isTreasure = true;
 
-            bonusAction = 2;
-            bonusTreasure = 0;
-            bonusDraw = 1;
+            bonusAction = 0;
+            bonusTreasure = 2;
+            bonusDraw = 0;
             bonusBuy = 0;
 
             victoryPoint = 0;
@@ -39,10 +38,7 @@ namespace DominionMachineLearning.CardClassFiles
 
         public void playCard(IPlayers player)
         {
-            GameManager.drawCard(player);
-
-            player.currentAction--;
-            player.currentAction += bonusAction;
+            player.currentTreasure += bonusTreasure;
         }
 
         public int cost //cost to buy the card

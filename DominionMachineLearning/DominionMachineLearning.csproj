@@ -42,18 +42,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attribute.cs" />
-    <Compile Include="CardClassFiles\Copper.cs" />
-    <Compile Include="CardClassFiles\Estate.cs" />
-    <Compile Include="CardClassFiles\Village.cs" />
+    <Compile Include="CardClassFiles\BlankCard.cs" />
+    <Compile Include="CardClassFiles\TreasureCards\Copper.cs" />
+    <Compile Include="CardClassFiles\VictoryCards\Duchy.cs" />
+    <Compile Include="CardClassFiles\VictoryCards\Estate.cs" />
+    <Compile Include="CardClassFiles\TreasureCards\Gold.cs" />
+    <Compile Include="CardClassFiles\VictoryCards\Province.cs" />
+    <Compile Include="CardClassFiles\TreasureCards\Silver.cs" />
+    <Compile Include="CardClassFiles\ActionCards\Smithy.cs" />
+    <Compile Include="CardClassFiles\ActionCards\Village.cs" />
+    <Compile Include="CardClassFiles\ActionCards\WoodCutter.cs" />
     <Compile Include="GameManager.cs" />
-    <Compile Include="Card.cs" />
-    <Compile Include="IPlayers.cs" />
+    <Compile Include="CardClassFiles\Card.cs" />
+    <Compile Include="Players\Human\HumanPlayer.cs" />
+    <Compile Include="Players\IPlayers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Players\Machine\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

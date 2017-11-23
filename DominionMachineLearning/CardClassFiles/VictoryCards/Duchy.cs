@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace DominionMachineLearning.CardClassFiles
 {
-    class Estate
+    class Duchy : Card
     {
-        //All variables are set to the according values for the Estate card
-        //notable variable of the copper card:
-        //  cost = 2
-        //  name = "ESTATE"
+        //All variables are set to the according values for the Duchy card
+        //notable variable of the Duchy card:
+        //  cost = 5
+        //  name = "DUCHY"
         //  isVictory = true
-        //  victoryPoint = 1
+        //  victoryPoint = 3
 
 
-        public Estate()
+        public Duchy()
         {
-            cost = 2;
+            cost = 5;
 
-            name = "ESTATE";
+            name = "DUCHY";
 
             isAction = false;
             isVictory = true;
@@ -31,7 +31,7 @@ namespace DominionMachineLearning.CardClassFiles
             bonusDraw = 0;
             bonusBuy = 0;
 
-            victoryPoint = 1;
+            victoryPoint = 3;
 
             hasOwnAttribute = false;
         }

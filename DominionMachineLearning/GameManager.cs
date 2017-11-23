@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DominionMachineLearning;
+using DominionMachineLearning.Players.Human;
 
 namespace DominionMachineLearning
 {
@@ -42,7 +43,52 @@ namespace DominionMachineLearning
         /// </summary>
         public static void setupGame()
         {
-            
+            for(int i = 0; i < 20; i++) //add 20 coppers to the supply piles
+            {
+                supplyPile.Add(new Copper());
+            }
+
+            for (int i = 0; i < 20; i++)    //add 20 silvers to the supply piles
+            {
+                supplyPile.Add(new Silver());
+            }
+
+            for (int i = 0; i < 20; i++)    //add 20 golds to the supply piles
+            {
+                supplyPile.Add(new Gold());
+            }
+
+            for(int i = 0; i < 8; i++)  //add 8 estates to the supply piles
+            {
+                supplyPile.Add(new Estate());
+            }
+
+            for (int i = 0; i < 8; i++)  //add 8 duchys to the supply piles
+            {
+                supplyPile.Add(new Duchy());
+            }
+
+            for (int i = 0; i < 8; i++)  //add 8 provinces to the supply piles
+            {
+                supplyPile.Add(new Province());
+            }
+
+            for(int i = 0; i < 10; i++) //add 10 villages to the supply piles
+            {
+                supplyPile.Add(new Village());
+            }
+
+            for (int i = 0; i < 10; i++) //add 10 smithys to the supply piles
+            {
+                supplyPile.Add(new Smithy());
+            }
+
+            for (int i = 0; i < 10; i++) //add 10 woodcutters to the supply piles
+            {
+                supplyPile.Add(new WoodCutter());
+            }
+
+            players.Add(new HumanPlayer());
         }
 
         /// <summary>
@@ -66,7 +112,7 @@ namespace DominionMachineLearning
         {
             if(player.deck.Count > 0)
             {
-                Card rndCard = player.deck.ElementAt(rnd.Next(1, player.deck.Count));
+                Card rndCard = player.deck.ElementAt(rnd.Next(0, player.deck.Count -1));
                 player.deck.Remove(rndCard);
                 player.hand.Add(rndCard);
             }
@@ -74,7 +120,10 @@ namespace DominionMachineLearning
             {
                 if(player.discard.Count > 0)
                 {
-                    player.deck = player.discard;
+                    foreach (Card card in player.discard)
+                    {
+                        player.deck.Add(card);
+                    }
 
                     player.discard.Clear();
 
@@ -96,11 +145,22 @@ namespace DominionMachineLearning
             int[] numOfCard = new int[supplyPile.Count];    //array of how many of each card are in the supply pile
 
 
-            int i = 0;
+            int i = -1;
 
             foreach(Card card in supplyPile)
             {
-                if (tempCardList.Contains(card))
+
+                bool isCardAlreadyListed = false;
+
+                foreach(Card tempCard in tempCardList)
+                {
+                    if(String.Compare(tempCard.name, card.name, true) == 0)
+                    {
+                        isCardAlreadyListed = true;
+                    }
+                }
+
+                if (isCardAlreadyListed)
                 {
                     numOfCard[i]++;
                 }

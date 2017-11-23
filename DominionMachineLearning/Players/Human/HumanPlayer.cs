@@ -138,6 +138,7 @@ namespace DominionMachineLearning.Players.Human
                     string cardToBuy = "";
                     do
                     {
+                        Console.WriteLine("CURRENT TREASURE: " + currentTreasure);
                         Console.WriteLine("WHICH CARD TO BUY (OR ENTER 'NONE')");    //ask the user for what card to buy
                         cardToBuy = Console.ReadLine();     //store the name of the card wanted to buy
 
@@ -179,15 +180,24 @@ namespace DominionMachineLearning.Players.Human
             } while (stillBuyPhase);
 
             //CLEANUP PHASE
-            List<Card> copyOfHand = hand;
+            List<Card> copyOfHand = new List<Card>();
+            foreach(Card card in hand)
+            {
+                copyOfHand.Add(card);
+            }
+
             foreach(Card card in copyOfHand)    //remove all cards from hand and put them in the discard
             {
                 hand.Remove(card);
                 discard.Add(card);
             }
 
-            List<Card> copyOfInPlay = inPlay;
-            foreach(Card card in copyOfInPlay)  //remove all cards from in play and put them in the discard
+            List<Card> copyOfInPlay = new List<Card>();
+            foreach (Card card in inPlay)
+            {
+                copyOfInPlay.Add(card);
+            }
+            foreach (Card card in copyOfInPlay)  //remove all cards from in play and put them in the discard
             {
                 inPlay.Remove(card);
                 discard.Add(card);

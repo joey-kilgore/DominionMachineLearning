@@ -10,6 +10,7 @@ namespace DominionMachineLearning
     {
         static void Main(string[] args)
         {
+            GameManager.playGame();
         }
     }
 }

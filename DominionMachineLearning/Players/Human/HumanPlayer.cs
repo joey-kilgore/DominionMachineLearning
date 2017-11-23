@@ -70,11 +70,12 @@ namespace DominionMachineLearning.Players.Human
                         bool stillChoosingCard = true;  //keeps track of when the player has successfully chosen a card
                         Card chosenCard = new BlankCard();  //declare and instantiate chosenCard so that we can use it.
                                                             //it is declared as a blankCard to because objects can't be declared as interfaces
+                        string cardToPlay = "";
 
                         do
                         {
-                            Console.WriteLine("WHICH CARD TO PLAY");    //ask the user for what action card to play
-                            string cardToPlay = Console.ReadLine();     //store the name of the card wanted to play
+                            Console.WriteLine("WHICH CARD TO PLAY (OR ENTER 'NONE')");    //ask the user for what action card to play
+                            cardToPlay = Console.ReadLine();     //store the name of the card wanted to play
 
                             foreach(Card card in hand)  //loop through hand and check if the card entered is actually in the players hand
                             {
@@ -85,12 +86,24 @@ namespace DominionMachineLearning.Players.Human
                                 }
                             }
 
+                            if (String.Compare(cardToPlay, "NONE", true) == 0)   //check if player entered none
+                            {
+                                stillChoosingCard = false;
+                            }
+
                         } while (stillChoosingCard);    //repeats until player enters a card that is actually in the player's hand
 
-                        hand.Remove(chosenCard);    //remove chosen card from hand. this is like the player laying the card down
-                        inPlay.Add(chosenCard);     //add chosen card to inPlay
+                        if (String.Compare(cardToPlay, "NONE", true) != 0)
+                        {
+                            hand.Remove(chosenCard);    //remove chosen card from hand. this is like the player laying the card down
+                            inPlay.Add(chosenCard);     //add chosen card to inPlay
 
-                        chosenCard.playCard(this);  //resolve the action card
+                            chosenCard.playCard(this);  //resolve the action card
+                        }
+                        else
+                        {
+                            stillActionPhase = false;
+                        }
                     }
                     else
                     {
@@ -103,6 +116,82 @@ namespace DominionMachineLearning.Players.Human
                 }
             } while (stillActionPhase);
 
+            foreach(Card card in hand)  //loop through all cards in hand and play all treasure cards
+            {
+                if (card.isTreasure)
+                {
+                    card.playCard(this);
+                }
+            }
+
+            //BUY PHASE
+            bool stillBuyPhase = true;
+            do
+            {
+                GameManager.outputSupplyPiles();
+
+                if (currentBuy > 0)
+                {
+                    bool stillChoosingCard = true;  //keeps track of when the player has successfully chosen a card
+                    Card chosenCard = new BlankCard();  //declare and instantiate chosenCard so that we can use it.
+                                                        //it is declared as a blankCard to because objects can't be declared as interfaces
+                    string cardToBuy = "";
+                    do
+                    {
+                        Console.WriteLine("WHICH CARD TO BUY (OR ENTER 'NONE')");    //ask the user for what card to buy
+                        cardToBuy = Console.ReadLine();     //store the name of the card wanted to buy
+
+                        foreach (Card card in GameManager.supplyPile)  //loop through supply pile and check if the card entered is actually in the supply pile
+                        {
+                            if (String.Compare(card.name, cardToBuy, true) == 0)  //compare card name entered to the name of each card in supply pile
+                            {
+                                if (card.cost <= currentTreasure)   //check that the player can afford the card they chose
+                                {
+                                    stillChoosingCard = false;  //the card entered is actually in pile and the player has chosen a card
+                                    chosenCard = card;
+                                }
+                            }
+                        }
+
+                        if (String.Compare(cardToBuy, "NONE", true) == 0)   //check if player entered none
+                        {
+                            stillChoosingCard = false;
+                        }
+
+                    } while (stillChoosingCard);    //repeats until player enters a card that is actually in the supply pile
+
+                    if (String.Compare(cardToBuy, "NONE", true) != 0)
+                    {
+                        GameManager.supplyPile.Remove(chosenCard);  //actions are done as if the player bought thecard put it in the discard 
+                        this.discard.Add(chosenCard);               //and now has fewer buys and treasure
+                        currentBuy--;
+                        currentTreasure -= chosenCard.cost;
+                    }
+                    else
+                    {
+                        stillBuyPhase = false;
+                    }
+                }
+                else
+                {
+                    stillBuyPhase = false;
+                }
+            } while (stillBuyPhase);
+
+            //CLEANUP PHASE
+            List<Card> copyOfHand = hand;
+            foreach(Card card in copyOfHand)    //remove all cards from hand and put them in the discard
+            {
+                hand.Remove(card);
+                discard.Add(card);
+            }
+
+            List<Card> copyOfInPlay = inPlay;
+            foreach(Card card in copyOfInPlay)  //remove all cards from in play and put them in the discard
+            {
+                inPlay.Remove(card);
+                discard.Add(card);
+            }
         }
 
         /// <summary>

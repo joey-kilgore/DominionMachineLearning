@@ -18,10 +18,9 @@ namespace DominionMachineLearning
         /// 6. VP opponent
         /// 
         /// each of the first 4 categories contain one number corresponding to the amount of each possible card
-        /// these cards are listed in order of lowest cost to highest
-        ///     then alphabetical
+        /// these cards are listed in alphabetical order
         ///     
-        /// this totals to 66 values
+        /// this totals to 66 values in a normal game
         ///     there are always 16 different cards and therefore
         ///     16-player hand
         ///     16-player deck
@@ -30,9 +29,14 @@ namespace DominionMachineLearning
         ///     1 -VP player
         ///     1 -VP opponent
         /// </summary>
-        double[] weight = new double[66];  
+        double[] weight; 
 
         double value = 0.0;   //value of the attribute
+
+        public Attribute(List<double> loadWeight)
+        {
+            weight = loadWeight.ToArray();
+        }
 
         /// <summary>
         /// calculates the new value of the attribute

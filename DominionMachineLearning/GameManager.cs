@@ -18,6 +18,8 @@ namespace DominionMachineLearning
         public static List<IPlayers> players = new List<IPlayers>();
         public static bool gameEnd = true;
 
+        public static List<Card> supplyPile = new List<Card>();
+
         /// <summary>
         /// runs a game of dominion
         /// </summary>
@@ -80,6 +82,41 @@ namespace DominionMachineLearning
                     player.deck.Remove(rndCard);
                     player.hand.Add(rndCard);
                 }
+            }
+        }
+
+        /// <summary>
+        /// outputs the supply piles
+        /// displays the name of the card, cost, and how many of the card are available
+        /// </summary>
+        public static void outputSupplyPiles()
+        {
+            List<Card> tempCardList = new List<Card>(); //temporary list of cards for searching through
+
+            int[] numOfCard = new int[supplyPile.Count];    //array of how many of each card are in the supply pile
+
+
+            int i = 0;
+
+            foreach(Card card in supplyPile)
+            {
+                if (tempCardList.Contains(card))
+                {
+                    numOfCard[i]++;
+                }
+                else
+                {
+                    i++;
+                    tempCardList.Add(card);
+                }
+            }
+
+            i = 0;
+            Console.WriteLine("Name Cost #Available");
+            foreach(Card card in tempCardList)
+            {
+                Console.WriteLine(card.name + " " + card.cost + " " + numOfCard[i]);
+                i++;
             }
         }
     }
